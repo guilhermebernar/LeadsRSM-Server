@@ -9,7 +9,9 @@ builder.Services.AddControllers();
 
 builder.Services.AddEntityFrameworkNpgsql()
     .AddDbContext<Contexto>(options =>
-    options.UseNpgsql("Host=localhost;Port=5432;Pooling=true;Database=rsm;User Id=postgres;Password=testdb;"));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("LeadsDb")));
+
+builder.Services.AddCors();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -23,6 +25,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(c =>{
+    c.AllowAnyHeader();
+    c.AllowAnyOrigin();
+    c.AllowAnyMethod();
+});
 
 app.UseHttpsRedirection();
 

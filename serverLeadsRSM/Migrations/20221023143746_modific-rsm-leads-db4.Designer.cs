@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace serverLeadsRSM.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20221020013532_rsm")]
-    partial class rsm
+    [Migration("20221023143746_modific-rsm-leads-db4")]
+    partial class modificrsmleadsdb4
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,34 +26,41 @@ namespace serverLeadsRSM.Migrations
 
             modelBuilder.Entity("rsmapp.Model.Lead", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("Id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("CompanyName")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("CompanyName");
 
-                    b.Property<int>("CompanySize")
-                        .HasColumnType("integer")
+                    b.Property<string>("CompanySize")
+                        .IsRequired()
+                        .HasColumnType("text")
                         .HasColumnName("CompanySize");
 
-                    b.Property<DateTime?>("CreateAt")
+                    b.Property<DateTime>("CreateAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("CreateAt");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("text")
-                        .HasColumnName("Description");
+                        .HasColumnName("description");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("Name");
 
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("PhoneNumber");
+
                     b.Property<string>("TypeRequest")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("TypeRequest");
 

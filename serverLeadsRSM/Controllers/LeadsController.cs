@@ -12,6 +12,7 @@ namespace serverLeadsRSM.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class LeadsController : ControllerBase
     {
         private readonly Contexto _context;
@@ -30,7 +31,7 @@ namespace serverLeadsRSM.Controllers
 
         // GET: api/Leads/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Lead>> GetLead(int id)
+        public async Task<ActionResult<Lead>> GetLead(Guid id)
         {
             var lead = await _context.Leads.FindAsync(id);
 
@@ -45,7 +46,7 @@ namespace serverLeadsRSM.Controllers
         // PUT: api/Leads/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutLead(int id, Lead lead)
+        public async Task<IActionResult> PutLead(Guid id, Lead lead)
         {
             if (id != lead.Id)
             {
@@ -86,7 +87,7 @@ namespace serverLeadsRSM.Controllers
 
         // DELETE: api/Leads/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteLead(int id)
+        public async Task<IActionResult> DeleteLead(Guid id)
         {
             var lead = await _context.Leads.FindAsync(id);
             if (lead == null)
@@ -100,7 +101,7 @@ namespace serverLeadsRSM.Controllers
             return NoContent();
         }
 
-        private bool LeadExists(int id)
+        private bool LeadExists(Guid id)
         {
             return _context.Leads.Any(e => e.Id == id);
         }
